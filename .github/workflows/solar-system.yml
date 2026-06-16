@@ -12,6 +12,7 @@ env:
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
     
 jobs:
+
     unit-testing:
         strategy:
           matrix:
@@ -43,3 +44,28 @@ jobs:
           with:
             name: Mocha-Test-Result
             path: test-results.xml
+
+    code-coverage:
+        name: code-coverage
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v6
+
+        - name: Setup NodeJS Version
+          uses: actions/setup-node@v6
+          with:
+            node-version: 20
+    
+        - name: Install Dependencies
+          run: npm install
+    
+        - name: Code Coverage
+          run: npm run coverage
+          
+        - name: Archive Test Result
+          uses: actions/upload-artifact@v7
+          with:
+            name: Code-Coverage-Result
+            path: ./coverage
+            # retention-days: 5 ## Optional retention
