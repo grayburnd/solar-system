@@ -21,7 +21,6 @@ jobs:
             exclude:
               - nodejs_version: 23
                 operating_system: macos-latest
-        name: Unit Testing
         runs-on: ${{ matrix.operating_system }}
         steps:
 
@@ -53,7 +52,6 @@ jobs:
             path: test-results.xml
 
     code-coverage:
-        name: code-coverage
         runs-on: ubuntu-latest
         steps:
         - name: Checkout Repository
