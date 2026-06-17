@@ -157,7 +157,14 @@ jobs:
             with:
               version: '1.36' 
 
-          - name: Checkout Repository
+          - name: Set Kubeconfig
+            uses: azure/k8s-set-context@v5
+            with:
+              method: kubeconfig
+              kubeconfig: ${{ secrets.KUBE_CONFIG }}
+              # context: <context name> # current-context from kubeconfig is used as default
+
+          - name: Check K8s Cluster Details
             run: |
               kubectl version --short
               kubectl get nodes
