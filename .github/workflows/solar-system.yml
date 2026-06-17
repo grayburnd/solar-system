@@ -142,3 +142,24 @@ jobs:
               tags: |
                 ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
                 ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+
+    dev-deploy:
+        needs: docker
+        runs-on: ubuntu-latest
+        # permissions:
+        #   packages: write
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v6
+          
+          - name: Install Kubectl
+            uses: azure/setup-kubectl@v5
+            with:
+              version: '1.36' 
+
+          - name: Checkout Repository
+            run: |
+              kubectl version --short
+              kubectl get nodes
+          
+
