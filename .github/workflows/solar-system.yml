@@ -19,7 +19,7 @@ jobs:
             ports:
               - 27017:27017
         env:
-          MONGO_URI: mongodb//localhost:27017/superData ## To make dynamic
+          MONGO_URI: mongodb://localhost:27017/superData ## To make dynamic
           MONGO_USERNAME: non-prod-user ## To make dynamic
           MONGO_PASSWORD: non-prod-password ## To make dynamic
         strategy:
